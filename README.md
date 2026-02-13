@@ -151,3 +151,4 @@ already set those variables.
 - Minimize/restore internals are still present, but with client-side decorations
   there is no Flux minimize titlebar button.
 - Flux does not force toolkit decoration env hints; clients decide their own style.
+- THis was tested in Debian, and other distros are not ensured for working state.
