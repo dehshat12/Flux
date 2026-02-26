@@ -126,8 +126,7 @@ static void view_get_geometry_box(struct flux_view *view, struct wlr_box *geo) {
 		return;
 	}
 
-	struct wlr_box reported = {0};
-	wlr_xdg_surface_get_geometry(view->xdg_surface, &reported);
+	struct wlr_box reported = view->xdg_surface->current.geometry;
 	if (reported.width > 1 && reported.height > 1) {
 		/*
 		 * Trust explicit non-negative xdg geometry when available. This keeps
