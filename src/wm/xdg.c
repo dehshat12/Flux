@@ -261,8 +261,14 @@ static void view_set_app_id_notify(struct wl_listener *listener, void *data) {
 
 void new_xdg_toplevel_notify(struct wl_listener *listener, void *data) {
 	struct flux_server *server = wl_container_of(listener, server, new_xdg_toplevel);
-	struct wlr_xdg_toplevel *xdg_toplevel = data;
-	struct wlr_xdg_surface *xdg_surface = xdg_toplevel->base;
+	struct wlr_xdg_surface *xdg_surface = data;
+	if (!xdg_surface || xdg_surface->role != WLR_XDG_SURFACE_ROLE_TOPLEVEL) {
+		return;
+	}
+	struct wlr_xdg_toplevel *xdg_toplevel = xdg_surface->toplevel;
+	if (!xdg_toplevel) {
+		return;
+	}
 
 	struct flux_view *view = calloc(1, sizeof(*view));
 	view->server = server;

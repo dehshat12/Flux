@@ -14,7 +14,7 @@ WARNFLAGS ?= -Wall -Wextra
 BASE_CFLAGS := $(WARNFLAGS) -std=c11
 
 WLROOTS_PC := $(strip $(shell \
-	for mod in wlroots wlroots-0.18 wlroots-0.17; do \
+	for mod in wlroots wlroots-0.19 wlroots-0.18 wlroots-0.17; do \
 		if $(PKG_CONFIG) --exists $$mod; then \
 			echo $$mod; \
 			exit 0; \
@@ -22,7 +22,7 @@ WLROOTS_PC := $(strip $(shell \
 	done))
 
 ifeq ($(WLROOTS_PC),)
-$(error wlroots pkg-config module not found (tried wlroots, wlroots-0.18, wlroots-0.17))
+$(error wlroots pkg-config module not found (tried wlroots, wlroots-0.19, wlroots-0.18, wlroots-0.17))
 endif
 
 WAYLAND_PROTOCOLS_DIR := $(strip $(shell $(PKG_CONFIG) --variable=pkgdatadir wayland-protocols))

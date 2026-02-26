@@ -34,7 +34,7 @@ Required to build:
 
 ```bash
 sudo apt install -y build-essential pkg-config \
-  libwlroots-0.18-dev libwayland-dev libwayland-bin wayland-protocols \
+  libwlroots-0.19-dev libwayland-dev libwayland-bin wayland-protocols \
   libxkbcommon-dev libinput-dev libdrm-dev libpng-dev
 ```
 

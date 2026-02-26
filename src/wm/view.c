@@ -303,8 +303,15 @@ static void apply_content_transform_cb(struct wlr_scene_buffer *buffer,
 	(void)sy;
 	struct content_transform_state *state = data;
 
-	int base_w = buffer->buffer_width > 0 ? buffer->buffer_width : 1;
-	int base_h = buffer->buffer_height > 0 ? buffer->buffer_height : 1;
+	int base_w = 1;
+	int base_h = 1;
+	if (buffer->buffer) {
+		base_w = buffer->buffer->width > 0 ? buffer->buffer->width : 1;
+		base_h = buffer->buffer->height > 0 ? buffer->buffer->height : 1;
+	} else if (buffer->dst_width > 0 && buffer->dst_height > 0) {
+		base_w = buffer->dst_width;
+		base_h = buffer->dst_height;
+	}
 	int scaled_w = (int)lroundf((float)base_w * state->scale);
 	int scaled_h = (int)lroundf((float)base_h * state->scale);
 	if (scaled_w < 1) {

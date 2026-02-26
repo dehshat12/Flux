@@ -61,7 +61,7 @@ static void configure_libinput_device(struct wlr_input_device *device,
 		enum libinput_config_status tap_drag_lock_status =
 			libinput_device_config_tap_set_drag_lock_enabled(libinput,
 				(tap_drag_enabled && tap_drag_lock_enabled) ?
-					LIBINPUT_CONFIG_DRAG_LOCK_ENABLED_TIMEOUT :
+					LIBINPUT_CONFIG_DRAG_LOCK_ENABLED :
 					LIBINPUT_CONFIG_DRAG_LOCK_DISABLED);
 		log_libinput_status(name, "tap drag lock", tap_drag_lock_status);
 	}
@@ -230,7 +230,7 @@ void new_input_notify(struct wl_listener *listener, void *data) {
 		wlr_cursor_attach_input_device(server->cursor, device);
 		pointer_like = true;
 		break;
-	case WLR_INPUT_DEVICE_TABLET:
+	case WLR_INPUT_DEVICE_TABLET_TOOL:
 		wlr_cursor_attach_input_device(server->cursor, device);
 		pointer_like = true;
 		break;
