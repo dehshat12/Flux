@@ -159,7 +159,7 @@ int main(void) {
 		return 1;
 	}
 
-	server.backend = wlr_backend_autocreate(server.display, NULL);
+	server.backend = wlr_backend_autocreate(event_loop, NULL);
 	if (!server.backend) {
 		wlr_log(WLR_ERROR, "failed to create backend");
 		wl_display_destroy(server.display);
@@ -221,7 +221,7 @@ int main(void) {
 	}
 	wlr_data_device_manager_create(server.display);
 
-	server.output_layout = wlr_output_layout_create();
+	server.output_layout = wlr_output_layout_create(server.display);
 	server.scene = wlr_scene_create();
 	wlr_scene_attach_output_layout(server.scene, server.output_layout);
 	taskbar_init(&server);
@@ -255,7 +255,7 @@ int main(void) {
 	wl_signal_add(&server.backend->events.new_input, &server.new_input);
 
 	server.new_xdg_toplevel.notify = new_xdg_toplevel_notify;
-	wl_signal_add(&server.xdg_shell->events.new_surface, &server.new_xdg_toplevel);
+	wl_signal_add(&server.xdg_shell->events.new_toplevel, &server.new_xdg_toplevel);
 	server.xdg_activation_request_activate.notify = xdg_activation_request_activate_notify;
 	wl_signal_add(&server.xdg_activation_v1->events.request_activate,
 		&server.xdg_activation_request_activate);
