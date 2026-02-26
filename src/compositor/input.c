@@ -230,7 +230,11 @@ void new_input_notify(struct wl_listener *listener, void *data) {
 		wlr_cursor_attach_input_device(server->cursor, device);
 		pointer_like = true;
 		break;
+	#if defined(WLR_INPUT_DEVICE_TABLET_TOOL)
 	case WLR_INPUT_DEVICE_TABLET_TOOL:
+	#elif defined(WLR_INPUT_DEVICE_TABLET)
+	case WLR_INPUT_DEVICE_TABLET:
+	#endif
 		wlr_cursor_attach_input_device(server->cursor, device);
 		pointer_like = true;
 		break;
